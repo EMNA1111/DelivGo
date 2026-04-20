@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_page"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingLeft="3dp">
+
+    <ImageView
+        android:layout_width="126dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="0dp"
+        android:paddingLeft="30dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/app" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="DelivGO"
+        android:textColor="#1A1A2E"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="304dp"
+        android:layout_height="374dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_card"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="4dp"
+            android:text="Email"
+            android:textColor="#333333"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_input"
+            android:ems="10"
+            android:hint="votre.email@exemple.com"
+            android:textColorHint="#AAAAAA"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Mot de passe"
+            android:textColor="#333333"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_input"
+            android:ems="10"
+            android:hint="••••••••"
+            android:textColorHint="#AAAAAA"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:inputType="textPassword" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnlogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_button"
+            android:text="Se Connecter"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/mdpoublie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="53dp"
+            android:text="Mot de passe oublié ?"
+            android:textColor="#7C53C3" />
+
+    </LinearLayout>
+
+</LinearLayout>

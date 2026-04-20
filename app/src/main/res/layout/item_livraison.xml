@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/bg_card">
+
+    <!-- Header : Numéro + Nom + Statut -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/textNumero"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:background="@drawable/bg_button" />
+
+        <TextView
+            android:id="@+id/textNomLivraison"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="Livraison #1"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textStatut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="Livré"
+            android:textSize="12sp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/bg_button" />
+
+    </LinearLayout>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#F0F0F0" />
+
+    <!-- N° Commande -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="N° Commande"
+            android:textSize="12sp"
+            android:textColor="#888888" />
+
+        <TextView
+            android:id="@+id/textCommande"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CMD-2026-001"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- Client -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Client"
+        android:textSize="11sp"
+        android:textColor="#888888" />
+
+    <TextView
+        android:id="@+id/textClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mohamed Ben Ali"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <!-- Téléphone -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Téléphone"
+        android:textSize="11sp"
+        android:textColor="#888888" />
+
+    <TextView
+        android:id="@+id/textTelephone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+216 20 123 456"
+        android:textSize="14sp" />
+
+    <!-- Ville -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Ville"
+        android:textSize="11sp"
+        android:textColor="#888888" />
+
+    <TextView
+        android:id="@+id/textVille"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tunis"
+        android:textSize="14sp" />
+
+    <!-- Footer : Articles + Prix -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/textArticles"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="3 articles"
+            android:textSize="12sp"
+            android:textColor="#888888" />
+
+        <TextView
+            android:id="@+id/textPrix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="125 TND"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>
