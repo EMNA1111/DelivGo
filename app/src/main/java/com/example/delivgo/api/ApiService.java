@@ -24,7 +24,7 @@ public interface ApiService {
     Call<Map<String, Object>> getStats(@Query("livreur") int livreur);
 
     @PUT("/api/livraisons/etat")
-    Call<Map<String, Object>> modifierEtat(@Query("nocde") int nocde, @Query("etat") String etat);
+    Call<Void> modifierEtat(@Query("nocde") int nocde, @Query("etat") String etat);
 
     @GET("/api/messages")
     Call<List<Message>> getMessages(@Query("user1") int user1, @Query("user2") int user2);
@@ -36,4 +36,18 @@ public interface ApiService {
                                  @Query("urgent") int urgent);
     @GET("/api/controleur/stats")
     Call<Map<String, Object>> getStatsControleur();
+    @PUT("/api/messages/lire")
+    Call<Void> marquerLus(@Query("expediteur") int expediteur, @Query("destinataire") int destinataire);
+    // Pour les livraisons d'aujourd'hui (utilisé ailleurs dans ton projet)
+    @GET("api/controleur/livraisons")
+    Call<List<Livraison>> getLivraisonsControleurJour();
+
+    // Pour TOUTES les livraisons (utilisé pour tes filtres par durée)
+    @GET("api/controleur/toutes-livraisons")
+    Call<List<Livraison>> getLivraisonsControleurToutes();
+    @GET("/api/controleur/top-livreurs")
+    Call<List<Map<String, Object>>> getTopLivreurs();
+
+    @GET("/api/controleur/top-clients")
+    Call<List<Map<String, Object>>> getTopClients();
 }

@@ -1,5 +1,7 @@
 package com.example.delivgo.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Livraison {
     private int nocde;
     private String dateliv;
@@ -12,6 +14,10 @@ public class Livraison {
     private int nbArticles;
     private double montantTotal;
 
+    @SerializedName("nomLivreur")
+    private String nomLivreur;
+
+    public String getNomLivreur() { return nomLivreur; }
     public int getNocde() { return nocde; }
     public String getDateliv() { return dateliv; }
     public String getEtatliv() { return etatliv; }

@@ -1,5 +1,6 @@
 package com.example.delivgo;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -41,6 +42,10 @@ public class MessagerieActivity extends AppCompatActivity {
         idUser          = getIntent().getIntExtra("idUser", 0);
         idInterlocuteur = getIntent().getIntExtra("idInterlocuteur", 0);
 
+
+        // Marquer les messages comme lus dès l'ouverture
+        marquerMessagesLus();
+
         findViewById(R.id.btnRetour).setOnClickListener(v -> finish());
 
         findViewById(R.id.btnEnvoyer).setOnClickListener(v -> {
@@ -58,6 +63,17 @@ public class MessagerieActivity extends AppCompatActivity {
             }
         };
         handler.post(rafraichir);
+    }
+
+    private void marquerMessagesLus() {
+        ApiService api = RetrofitHelper.getService();
+        api.marquerLus(idInterlocuteur, idUser).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {}
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {}
+        });
     }
 
     private void chargerMessages() {
@@ -99,13 +115,11 @@ public class MessagerieActivity extends AppCompatActivity {
             rowParams.setMargins(0, 6, 0, 6);
             row.setLayoutParams(rowParams);
 
-            // Bulle du message
             TextView textMsg = new TextView(this);
             textMsg.setText(msg.getContenu());
             textMsg.setTextSize(14);
             textMsg.setPadding(28, 18, 28, 18);
 
-            // Couleur selon urgent ou pas
             if (msg.getUrgent() == 1) {
                 textMsg.setTextColor(Color.WHITE);
                 textMsg.setBackgroundColor(Color.parseColor("#D32F2F"));
@@ -123,7 +137,6 @@ public class MessagerieActivity extends AppCompatActivity {
             msgParams.setMargins(estMoi ? 80 : 16, 0, estMoi ? 16 : 80, 0);
             textMsg.setLayoutParams(msgParams);
 
-            // Heure du message
             TextView textHeure = new TextView(this);
             String dateEnvoi = msg.getDateEnvoi();
             String heure;
@@ -152,7 +165,6 @@ public class MessagerieActivity extends AppCompatActivity {
             containerMessages.addView(row);
         }
 
-        // Scroll vers le bas
         scrollMessages.post(() -> scrollMessages.fullScroll(ScrollView.FOCUS_DOWN));
     }
 

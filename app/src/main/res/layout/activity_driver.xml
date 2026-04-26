@@ -17,82 +17,117 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textNomLivreur"
+            <!-- Header -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="#7C53C3"
                 android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:text="Bonjour , Karim !"
-                android:textColor="#E4E0E0"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:paddingStart="12dp">
 
+                <ImageView
+                    android:id="@+id/btnRetour"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_arrow_back"
+                    android:tint="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/textNomLivreur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="Bonjour , Karim !"
+                    android:textColor="#E4E0E0"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Card livraisons -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardLivraisons"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="120dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
                 app:cardBackgroundColor="#7C53C3"
                 app:cardCornerRadius="20dp">
 
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Mes livraisons"
-                    android:textColor="#F4EFEF"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="12dp">
 
-                <ImageView
-                    android:layout_width="75dp"
-                    android:layout_height="53dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginBottom="35dp"
-                    android:src="@drawable/log" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/textTotal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="80dp"
-                    android:text="15 Total"
-                    android:textColor="#E9E4E4"
-                    android:textSize="26sp"
-                    android:textStyle="bold" />
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/log" />
 
-                <TextView
-                    android:id="@+id/textLivrees"
-                    android:layout_width="wrap_content"
-                    android:layout_height="47dp"
-                    android:layout_marginLeft="130dp"
-                    android:layout_marginTop="80dp"
-                    android:text="2 Livrées"
-                    android:textColor="#E9E4E4"
-                    android:textSize="26sp"
-                    android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="Mes livraisons"
+                            android:textColor="#F4EFEF"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/textRestantes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="255dp"
-                    android:layout_marginTop="80dp"
-                    android:text="13 Restantes"
-                    android:textColor="#E9E4E4"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="12dp">
+
+                        <TextView
+                            android:id="@+id/textTotal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="15 Total"
+                            android:textColor="#E9E4E4"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textLivrees"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="2 Livrées"
+                            android:textColor="#E9E4E4"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textRestantes"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="13 Restantes"
+                            android:textColor="#E9E4E4"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
+            <!-- Date -->
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="122dp"
@@ -116,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="4dp"
-                    android:text="17 avril"
+                    android:text=" "
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -161,7 +196,6 @@
         android:elevation="8dp"
         android:orientation="horizontal">
 
-        <!-- Accueil -->
         <LinearLayout
             android:id="@+id/btnAccueil"
             android:layout_width="0dp"
@@ -185,7 +219,6 @@
 
         </LinearLayout>
 
-        <!-- Messages -->
         <LinearLayout
             android:id="@+id/btnMessages"
             android:layout_width="0dp"

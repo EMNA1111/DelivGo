@@ -174,18 +174,19 @@
                     android:textColor="#1A1A2E"
                     android:textSize="14sp" />
 
-                <androidx.appcompat.widget.AppCompatButton
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnMaps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_button"
-                    android:backgroundTint="@null"
                     android:text="📍 Ouvrir dans Maps"
                     android:textColor="#FFFFFF"
                     android:textSize="13sp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp" />
-
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    app:backgroundTint="#4CAF50"
+                    app:cornerRadius="50dp" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

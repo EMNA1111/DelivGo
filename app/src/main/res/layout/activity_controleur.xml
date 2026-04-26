@@ -7,22 +7,36 @@
     android:background="@drawable/bg_page">
 
     <!-- ===== HEADER ===== -->
-    <TextView
+    <LinearLayout
         android:id="@+id/textView4"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:background="#7C53C3"
-        android:text="Tableau de bord"
-        android:textColor="#F6F2F2"
-        android:textSize="24sp"
-        android:textStyle="bold"
         android:gravity="center_vertical"
         android:paddingStart="12dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!-- ===== SCROLL CONTAINER ===== -->
+        <ImageView
+            android:id="@+id/btnRetour"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_back"
+            android:tint="#FFFFFF" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Tableau de bord"
+            android:textColor="#F6F2F2"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -91,7 +105,7 @@
 
                 <!-- Livrée -->
                 <LinearLayout
-                    android:layout_width="87dp"
+                    android:layout_width="0dp"
                     android:layout_height="140dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
@@ -125,7 +139,7 @@
 
                 <!-- Annulé -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="140dp"
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
@@ -159,13 +173,8 @@
             </LinearLayout>
 
             <!-- ===== CARTE : Restantes ===== -->
-
-            <!-- ===== CARTE : Top livreurs ===== -->
-
-            <!-- ===== CARTE : Top Clients ===== -->
-
             <LinearLayout
-                android:layout_width="332dp"
+                android:layout_width="match_parent"
                 android:layout_height="141dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/bg_card"
@@ -196,10 +205,11 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <!-- ===== CARTE : Top Livreurs ===== -->
             <LinearLayout
                 android:id="@+id/linearLayout3"
-                android:layout_width="332dp"
-                android:layout_height="228dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/bg_card"
                 android:orientation="vertical"
@@ -227,19 +237,19 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imageView9"
-                    android:layout_width="309dp"
-                    android:layout_height="131dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/topliv" />
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/chartLivreurs"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="8dp" />
+
             </LinearLayout>
 
+            <!-- ===== CARTE : Top Clients ===== -->
             <LinearLayout
                 android:id="@+id/linearLayout5"
-                android:layout_width="340dp"
-                android:layout_height="329dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/bg_card"
                 android:orientation="vertical"
@@ -267,13 +277,12 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imageView12"
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/chartClients"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/clients" />
+                    android:layout_marginTop="8dp" />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -316,6 +325,7 @@
 
         <!-- Livraisons -->
         <LinearLayout
+            android:id="@+id/btnNavLivraisons"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

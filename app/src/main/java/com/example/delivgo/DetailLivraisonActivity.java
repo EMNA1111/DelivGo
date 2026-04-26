@@ -15,8 +15,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import com.example.delivgo.api.ApiService;
 import com.example.delivgo.api.RetrofitHelper;
+import com.example.delivgo.local.AppDatabase;
 import com.example.delivgo.model.Message;
-import java.util.Map;
 
 public class DetailLivraisonActivity extends AppCompatActivity {
 
@@ -24,6 +24,7 @@ public class DetailLivraisonActivity extends AppCompatActivity {
             textAdresse, textNbArticles, textModePaiement, textDate, textMontant;
     AppCompatButton btnMaps, btnEnvoyerProbleme;
     EditText editProbleme;
+    AppDatabase db;
 
     int nocde, idLivreur, idControleur;
     String etatliv, nomclt, telclt, villeclt, adrclt, modepay, dateliv;
@@ -47,6 +48,8 @@ public class DetailLivraisonActivity extends AppCompatActivity {
         btnMaps          = findViewById(R.id.btnMaps);
         editProbleme     = findViewById(R.id.editProbleme);
         btnEnvoyerProbleme = findViewById(R.id.btnEnvoyerProbleme);
+
+        db = AppDatabase.getInstance(this);
 
         nocde        = getIntent().getIntExtra("nocde", 0);
         etatliv      = getIntent().getStringExtra("etatliv");
@@ -76,8 +79,7 @@ public class DetailLivraisonActivity extends AppCompatActivity {
 
         btnMaps.setOnClickListener(v -> {
             String url = "geo:0,0?q=" + Uri.encode(adrclt);
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(intent);
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
         });
 
         // Clic sur statut → modifier l'état
@@ -87,34 +89,41 @@ public class DetailLivraisonActivity extends AppCompatActivity {
                     .setTitle("Modifier l'état")
                     .setItems(etats, (dialog, which) -> {
                         String nouvelEtat = etats[which];
-                        ApiService api = RetrofitHelper.getService();
-                        api.modifierEtat(nocde, nouvelEtat).enqueue(new Callback<Map<String, Object>>() {
-                            @Override
-                            public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
-                                if (response.isSuccessful()) {
-                                    etatliv = nouvelEtat;
-                                    afficherStatut(nouvelEtat);
-                                    Toast.makeText(DetailLivraisonActivity.this, "État modifié ✓", Toast.LENGTH_SHORT).show();
-                                    setResult(RESULT_OK);
-                                }
-                            }
-                            @Override
-                            public void onFailure(Call<Map<String, Object>> call, Throwable t) {
-                                Toast.makeText(DetailLivraisonActivity.this, "Erreur : " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+
+                        // 1. Sauvegarde dans Room immédiatement (modifie = 1)
+                        db.livraisonDao().modifierEtat(nocde, nouvelEtat);
+                        etatliv = nouvelEtat;
+                        afficherStatut(nouvelEtat);
+                        setResult(RESULT_OK);
+                        Toast.makeText(this, "État modifié ✓", Toast.LENGTH_SHORT).show();
+
+                        // 2. Essaie d'envoyer vers le serveur
+                        RetrofitHelper.getService().modifierEtat(nocde, nouvelEtat)
+                                .enqueue(new Callback<Void>() {
+                                    @Override
+                                    public void onResponse(Call<Void> call, Response<Void> response) {
+                                        if (response.isSuccessful()) {
+                                            // Marque comme synchronisé dans Room
+                                            db.livraisonDao().marquerSynchronise(nocde);
+                                        }
+                                    }
+                                    @Override
+                                    public void onFailure(Call<Void> call, Throwable t) {
+                                        // Pas de connexion → sera synchronisé à minuit
+                                    }
+                                });
                     })
                     .show();
         });
 
-        // Clic sur téléphone → appel direct
+        // Téléphone cliquable
         textTelephone.setOnClickListener(v -> {
             Intent callIntent = new Intent(Intent.ACTION_DIAL);
             callIntent.setData(Uri.parse("tel:" + telclt));
             startActivity(callIntent);
         });
 
-        // Bouton envoyer problème → message urgent dans la messagerie
+        // Envoyer problème urgent
         btnEnvoyerProbleme.setOnClickListener(v -> {
             String probleme = editProbleme.getText().toString().trim();
             if (probleme.isEmpty()) {
@@ -127,8 +136,7 @@ public class DetailLivraisonActivity extends AppCompatActivity {
                     "\nTél : " + telclt +
                     "\nProblème : " + probleme;
 
-            ApiService api = RetrofitHelper.getService();
-            api.envoyerMessage(idLivreur, idControleur, message, 1)
+            RetrofitHelper.getService().envoyerMessage(idLivreur, idControleur, message, 1)
                     .enqueue(new Callback<Message>() {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
